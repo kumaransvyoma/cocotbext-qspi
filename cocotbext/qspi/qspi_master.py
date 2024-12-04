@@ -44,10 +44,10 @@ class QspiMaster:
             await RisingEdge(self.bus.sclk)
             # Read 4 bits from the QSPI lines and combine them into a nibble
             nibble = (
-                (int(self.bus.io3.value[3]) << 3) |
-                (int(self.bus.io2.value[2]) << 2) |
-                (int(self.bus.io1.value[1]) << 1) |
-                int(self.bus.io0.value[0])
+                (int(self.bus.io3.value[0]) << 3) |
+                (int(self.bus.io2.value[1]) << 2) |
+                (int(self.bus.io1.value[2]) << 1) |
+                int(self.bus.io0.value[3])
             )
             byte = (byte << 4) | nibble  # Combine the nibble into the byte
             print("readvalue: ",byte,nibble)
