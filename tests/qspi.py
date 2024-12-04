@@ -157,9 +157,14 @@ async def test_peripherals(dut):
     dut._log.info('TX_REG value to be read:')
     read_data = await tb.qspi.read(address)
     dut._log.info('TX_REG valued at:',read_data)
+    for _ in range(100):
+        await RisingEdge(tb.dut.CLK)
+    dut._log.info('TX_REG value to be read:')
+    read_data = await tb.qspi.read(address)
+    dut._log.info('TX_REG valued at:',read_data)
     # await RisingEdge(dut.soc.uart_cluster.uart1.SOUT)
     # Wait a few cycles to ensure previous transactions complete
-    for _ in range(10):
+    for _ in range(10000):
         await RisingEdge(tb.dut.CLK)
     dut._log.info('The end value to be written:')
 
